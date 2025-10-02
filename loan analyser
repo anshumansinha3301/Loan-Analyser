@@ -1,0 +1,38 @@
+# Loan Analyzer
+
+def calculate_loan(principal, annual_rate, years):
+    """
+    Calculate monthly payment, total payment, and total interest
+    using the formula for EMI (Equated Monthly Installment)
+    """
+    monthly_rate = annual_rate / 12 / 100  # Convert annual rate to monthly decimal
+    months = years * 12
+
+    if monthly_rate == 0:  # No interest case
+        monthly_payment = principal / months
+    else:
+        monthly_payment = (principal * monthly_rate * (1 + monthly_rate) ** months) / ((1 + monthly_rate) ** months - 1)
+
+    total_payment = monthly_payment * months
+    total_interest = total_payment - principal
+
+    return monthly_payment, total_payment, total_interest
+
+
+# Input from user
+print("=== Loan Analyzer ===")
+principal = float(input("Enter loan amount: "))
+annual_rate = float(input("Enter annual interest rate (in %): "))
+years = int(input("Enter tenure in years: "))
+
+# Calculation
+monthly_payment, total_payment, total_interest = calculate_loan(principal, annual_rate, years)
+
+# Display results
+print("\n=== Loan Details ===")
+print(f"Loan Amount: ${principal:,.2f}")
+print(f"Annual Interest Rate: {annual_rate}%")
+print(f"Tenure: {years} years")
+print(f"Monthly Payment: ${monthly_payment:,.2f}")
+print(f"Total Payment: ${total_payment:,.2f}")
+print(f"Total Interest Paid: ${total_interest:,.2f}")

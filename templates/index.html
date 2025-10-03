@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏦 Loan Analyzer</h1>
+            <p>Calculate your monthly payments and amortization schedule</p>
+        </header>
+
+        <div class="content">
+            <div class="input-section">
+                <form id="loanForm">
+                    <div class="form-group">
+                        <label for="principal">Loan Amount ($)</label>
+                        <input type="number" id="principal" name="principal" step="0.01" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="annual_rate">Annual Interest Rate (%)</label>
+                        <input type="number" id="annual_rate" name="annual_rate" step="0.01" min="0" max="100" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="term_years">Loan Term (Years)</label>
+                        <input type="number" id="term_years" name="term_years" min="1" max="50" required>
+                    </div>
+                    
+                    <button type="submit" class="calculate-btn">Calculate Loan</button>
+                </form>
+            </div>
+
+            <div class="results-section" id="results" style="display: none;">
+                <h2>Loan Summary</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="label">Monthly Payment:</span>
+                        <span class="value" id="monthlyPayment">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Total Interest:</span>
+                        <span class="value" id="totalInterest">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Total Amount:</span>
+                        <span class="value" id="totalAmount">-</span>
+                    </div>
+                </div>
+
+                <div class="schedule-section">
+                    <h3>Amortization Schedule</h3>
+                    <div class="table-container">
+                        <table id="scheduleTable">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Payment</th>
+                                    <th>Principal</th>
+                                    <th>Interest</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Schedule will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <p>Please check your input values and try again.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
